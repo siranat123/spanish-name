@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+
+       <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Smart Spanish Name Generator</title>
+<title>Spanish Name Generator</title>
 <style>
     body {
         margin: 0;
@@ -24,7 +25,7 @@
         box-shadow: 0 0 40px rgba(0,0,0,0.5);
         backdrop-filter: blur(20px);
         text-align: center;
-        width: 400px;
+        width: 380px;
         animation: fadeIn 1.3s ease;
         position: relative;
     }
@@ -101,43 +102,33 @@
     <!-- Spain Flag -->
     <img class="flag" src="https://flagcdn.com/es.svg" alt="Spain Flag">
 
-    <h2>Smart Spanish Name Generator</h2>
-    <p>Type any name — get a real Spanish name 😎</p>
+    <h2>Spanish Name Generator</h2>
+    <p>Enter any name — I’ll “Spanish-ify” it 😎</p>
 
     <input type="text" id="inputName" placeholder="Type a name...">
+
     <button class="button" onclick="convertToSpanish()">Generate</button>
 
     <div class="result" id="resultName"></div>
+
+    <!-- Full Credit -->
     <div class="credit">By Siranat Thoumprathom</div>
 </div>
 
 <script>
-// Real Spanish Names (male + female)
-const spanishNames = [
-    "Alejandro", "Carlos", "Diego", "Fernando", "Javier", "Luis", "Miguel", "Rafael", "Santiago", "Antonio",
-    "Isabella", "Carmen", "Sofia", "Lucia", "Elena", "Maria", "Valentina", "Gabriela", "Ana", "Catalina"
-];
-
 function convertToSpanish() {
-    let input = document.getElementById("inputName").value.trim();
-    if (!input) {
+    let name = document.getElementById("inputName").value.trim();
+    if (!name) {
         document.getElementById("resultName").innerHTML = "Type something bro 😭";
         return;
     }
 
-    input = input.toLowerCase();
+    let base = name.toLowerCase();
 
-    // Find closest Spanish name (based on first letter match)
-    let filtered = spanishNames.filter(name => name[0].toLowerCase() === input[0]);
-    let spanishName;
+    let endings = ["o", "ito", "elo", "ardo", "ez", "u", "ico", "al"];
+    let randomEnding = endings[Math.floor(Math.random() * endings.length)];
 
-    if (filtered.length > 0) {
-        // Pick random from filtered
-        spanishName = filtered[Math.floor(Math.random() * filtered.length)];
-    } else {
-        // If no match, pick any random Spanish name
-        spanishName = spanishNames[Math.floor(Math.random() * spanishNames.length)];
-    }
+    let spanishName = base.charAt(0).toUpperCase() + base.slice(1) + randomEnding;
 
     document.getElementById("resultName").innerHTML = spanishName;
 }
